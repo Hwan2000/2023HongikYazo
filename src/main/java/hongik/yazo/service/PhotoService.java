@@ -14,11 +14,11 @@ public class PhotoService {
 
     private final Map<Character, String> metaURL = new HashMap<Character, String>();
 
-//    @PostConstruct
-//    public void init(){
-//        metaURL.put('P',"aaa");
-//        metaURL.put('C',"bbb");
-//    }
+    @PostConstruct
+    public void init(){
+        metaURL.put('P',"https://i.postimg.cc");
+        metaURL.put('C',"https://i.ibb.co");
+    }
 
     private final PhotoRepository photoRepository;
 
@@ -26,7 +26,7 @@ public class PhotoService {
 
         List<Photo> byWorkId = photoRepository.findByWorkId(workId);
         if(byWorkId.isEmpty()){
-            return new String[0];
+            return null;
         }
 
         String[] photoList = new String[byWorkId.size()];

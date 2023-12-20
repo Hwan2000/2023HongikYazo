@@ -2,6 +2,7 @@ package hongik.yazo.controller;
 
 import hongik.yazo.dto.ResponseDTO;
 import hongik.yazo.service.InformationService;
+import hongik.yazo.service.MovieService;
 import hongik.yazo.service.PhotoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ public class InformationController {
 
     private final InformationService informationService;
     private final PhotoService photoService;
+    private final MovieService movieService;
 
     @GetMapping("/getInfo/{num}")
     public ResponseEntity<ResponseDTO> getInfo(@PathVariable("num") int num){
@@ -22,6 +24,7 @@ public class InformationController {
         if(num > 0 && num < 31){
             ResponseDTO information = informationService.information(num);
             information.setPhotoList(photoService.photoList(num));
+            information.setMovieList(movieService.movieList(num));
 
             return ResponseEntity.ok(information);
         } else {
