@@ -1,5 +1,6 @@
 package hongik.yazo.controller;
 
+import hongik.yazo.dto.NameAndThumbnailResponse;
 import hongik.yazo.dto.ResponseDTO;
 import hongik.yazo.service.InformationService;
 import hongik.yazo.service.MovieService;
@@ -9,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -30,5 +33,17 @@ public class InformationController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/nameAndThumbnail")
+    public ResponseEntity<?> nameAndThumbnail(){
+        List<String> nameList = informationService.nameList();
+        List<String> thumbnailList = photoService.thumbnailList();
+
+        NameAndThumbnailResponse response = new NameAndThumbnailResponse();
+        response.setNameList(nameList);
+        response.setThumbnailList(thumbnailList);
+
+        return ResponseEntity.ok(response);
     }
 }
