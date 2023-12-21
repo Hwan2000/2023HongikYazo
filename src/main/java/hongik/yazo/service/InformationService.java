@@ -26,8 +26,8 @@ public class InformationService {
             Work work = byId.get();
 
             responseDTO.setTitle(work.getTitle().replace("\\n", "\n"));
-            responseDTO.setSize(work.getSize());
-            responseDTO.setIng(work.getIngredient());
+            responseDTO.setSize(work.getSize().replace("\\n", "\n"));
+            responseDTO.setIng(work.getIngredient().replace("\\n", "\n"));
             responseDTO.setName(work.getName());
             responseDTO.setText(work.getText().replace("\\n", "\n"));
         }
