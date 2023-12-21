@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -36,12 +37,13 @@ public class InformationController {
     }
 
     @GetMapping("/nameAndThumbnail")
-    public ResponseEntity<?> nameAndThumbnail(){
-        List<String> nameList = informationService.nameList();
+    public ResponseEntity<NameAndThumbnailResponse> nameAndThumbnail(){
+        NameAndThumbnailResponse nameAndTitleList = informationService.nameAndTitleList();
         List<String> thumbnailList = photoService.thumbnailList();
 
         NameAndThumbnailResponse response = new NameAndThumbnailResponse();
-        response.setNameList(nameList);
+        response.setTitleList(nameAndTitleList.getTitleList());
+        response.setNameList(nameAndTitleList.getNameList());
         response.setThumbnailList(thumbnailList);
 
         return ResponseEntity.ok(response);

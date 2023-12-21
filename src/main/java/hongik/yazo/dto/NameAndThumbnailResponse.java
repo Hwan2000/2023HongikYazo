@@ -9,5 +9,6 @@ import java.util.List;
 @Setter
 public class NameAndThumbnailResponse {
     private List<String> nameList;
+    private List<String> titleList;
     private List<String> thumbnailList;
 }
